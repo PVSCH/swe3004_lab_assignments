@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Chatbot</title>
+    <style>
+        #chat-container {
+            width: 400px;
+            margin: 20px auto;
+            border: 5px solid #ccc;
+            padding: 10px;
+            overflow-y: scroll;
+            height: 200px;
+            border-top-left-radius:20px;
+            border-bottom-left-radius: 20px;
+            border-color:chocolate;
+            background-color: aquamarine;
+           
+        }
+        body{
+          background-color:burlywood;
+            
+        }
+        h1{
+            color: rgb(0, 255, 229);
+            font-family: cursive;
+        }
+        #send-btn:hover{
+            color:black;
+            background-color:chartreuse;
+            border-radius: 10px;
+        }
+        #send-btn{
+            color:black;
+            background-color: blue;
+            border-radius: 10px;
+        }
+        #user-input{
+            border-radius: 8px;
+            width: 60px;
+            height:20px ;
+        }
+        #user-input:hover{
+            border-radius: 8px;
+            width: 150px;
+            transition: 2s;
+            height: 50px;
+        }
+        
+        </style>
+</head>
+<body>
+    <marquee behavior="scroll" direction="left" scrollamount="12"><h1>Simple Chatbot</h1></marquee>
+   <center> <b><caption>Click on text box to see the effects of hover and transitions</caption></b></center>
+    <div id="chat-container">
+        
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button id="send-btn">Send</button>
+    </div>
+        
+        <script>
+        const chatContainer = document.getElementById("chat-container");
+        const userInput = document.getElementById("user-input");
+        const sendBtn = document.getElementById("send-btn");
+
+        sendBtn.addEventListener("click", sendMessage);
+        
+        function sendMessage() {
+            const userMessage = userInput.value;
+            if (userMessage.trim() == "") {
+                return;
+            }
+
+            const userBubble = createChatBubble(userMessage, "user");
+            chatContainer.appendChild(userBubble);
+
+            const botMessage = generateBotResponse(userMessage);
+            const botBubble = createChatBubble(botMessage, "bot");
+            chatContainer.appendChild(botBubble);
+
+            // Scroll to the bottom of the chat container
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            userInput.value = "";
+        }
+        
+        function createChatBubble(message, sender) {
+            const bubble = document.createElement("div");
+            bubble.className = `chat-bubble ${sender}`;
+            bubble.textContent = message;
+            return bubble;
+        }
+        
+        function generateBotResponse(userMessage) {
+            // In a real chatbot, you would have more sophisticated logic to generate responses.
+            // For this example, we'll just echo the user's message.
+            return `You said: ${userMessage}`;
+        }
+        </script>
+</body>
+</html>
